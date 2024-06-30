@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.main.moviesApp.BuildConfig
 import com.main.moviesApp.MainActivity
@@ -38,15 +39,15 @@ class DetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View{
         // Inflate the layout for this fragment
         binding = FragmentDetailBinding.inflate(layoutInflater)
         args.idMovies?.let {
-            Log.d("TAG", "onCreateView: $it")
             getMovies(it)
         }
         return binding.root
     }
+
 
     private fun getMovies(idMovie: String) {
         lifecycleScope.launch {
@@ -85,6 +86,8 @@ class DetailFragment : Fragment() {
             desc.text = movie.overview
             Glide.with(requireContext())
                 .load("${BuildConfig.BASE_URL_IMAGE}${movie.poster_path}")
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
                 .apply(
                     RequestOptions().placeholder(R.drawable.ic_img_default)
                         .error(R.drawable.ic_img_default)
