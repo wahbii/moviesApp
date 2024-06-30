@@ -86,15 +86,19 @@ class DetailFragment : Fragment() {
             desc.text = movie.overview
             Glide.with(requireContext())
                 .load("${BuildConfig.BASE_URL_IMAGE}${movie.poster_path}")
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .skipMemoryCache(true)
                 .apply(
                     RequestOptions().placeholder(R.drawable.ic_img_default)
                         .error(R.drawable.ic_img_default)
                 )
+                .skipMemoryCache(true)
                 .centerCrop()
                 .into(img)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.clearData()
     }
 
 

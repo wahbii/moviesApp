@@ -21,6 +21,9 @@ class DetailViewModel@Inject constructor(
     val movie: StateFlow<Resource<Movie>> = _movie
 
 
+    fun clearData(){
+        _movie.value = Resource.Loading(null)
+    }
 
     fun fetchMovieDetail(id:String) {
         viewModelScope.launch {

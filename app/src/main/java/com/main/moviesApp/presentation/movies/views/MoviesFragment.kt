@@ -71,6 +71,8 @@ class MoviesFragment : Fragment() {
                         }
                         is Resource.Error -> {
                             toggleProgress(false)
+                            (requireActivity() as MainActivity).showDialog(context?.getString(R.string.dialog_message_error))
+
                             // Show error state
                         }
                     }
