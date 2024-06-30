@@ -13,7 +13,7 @@ import com.main.moviesApp.R
 import com.main.moviesApp.data.models.Movie
 import com.main.moviesApp.databinding.MovieItemLayoutBinding
 
-class MovieAdapter (private val context: Context) :
+class MovieAdapter  :
      PagingDataAdapter<Movie, MovieAdapter.MovieViewHolder>(MOVIE_COMPARATOR) {
 
     var onActionClickCallback: ((id: String?)->Unit)? = null
