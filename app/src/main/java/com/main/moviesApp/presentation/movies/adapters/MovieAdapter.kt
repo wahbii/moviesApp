@@ -1,6 +1,5 @@
 package com.main.moviesApp.presentation.movies.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
