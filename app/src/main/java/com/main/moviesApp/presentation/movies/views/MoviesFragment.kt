@@ -82,7 +82,7 @@ class MoviesFragment : Fragment() {
 
     private fun initRecycleView() {
         val layoutManager = GridLayoutManager(requireContext(), 1)
-        movieAdapter = MovieAdapter(requireContext())
+        movieAdapter = MovieAdapter()
         movieAdapter.apply {
             onActionClickCallback = {
                 val bundle = Bundle()
