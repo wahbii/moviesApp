@@ -1,0 +1,99 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-parcelize'
+    id "androidx.navigation.safeargs.kotlin" // Ensure this line is present
+
+}
+
+android {
+    namespace rootProject.ext.applicationId
+    compileSdk rootProject.ext.compileSdk
+
+    defaultConfig {
+        applicationId rootProject.ext.applicationId
+        minSdk rootProject.ext.minSdk
+        targetSdk rootProject.ext.targetSdk
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = rootProject.ext.jvmTarget
+    }
+
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
+
+    buildTypes.each {
+        it.buildConfigField("String", "BASE_URL", "${BASE_URL}")
+        it.buildConfigField("String", "APIKEY", "${APIKEY}")
+        it.buildConfigField("String", "BASE_URL_IMAGE", "${BASE_URL_IMAGE}")
+    }
+}
+
+dependencies {
+    implementation "androidx.core:core-ktx:${rootProject.ext.coreKtxVersion}"
+    implementation "androidx.appcompat:appcompat:${rootProject.ext.appcompatxVersion}"
+    implementation "androidx.constraintlayout:constraintlayout:${rootProject.ext.contraintLayoutVersion}"
+    androidTestImplementation "androidx.test.ext:junit:${rootProject.ext.androidJUnitVersion}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${rootProject.ext.espressoVersion}"
+    testImplementation "androidx.arch.core:core-testing:2.2.0"
+
+    implementation "com.google.android.material:material:${rootProject.ext.materialVersion}"
+
+    // Testing dependencies
+    testImplementation "junit:junit:${rootProject.ext.jUnitVersion}"
+    testImplementation "org.mockito:mockito-core:${rootProject.ext.mockitoversion}"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:${rootProject.ext.coroutines_test_version}"
+
+    androidTestImplementation "androidx.test:runner:1.4.0"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${rootProject.ext.espresso_version}"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofitVersion}"
+    implementation "com.squareup.retrofit2:converter-jackson:${rootProject.ext.retrofitVersion}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${rootProject.ext.retrofitLoggerVersion}"
+    implementation "com.squareup.retrofit2:converter-gson:${rootProject.ext.retrofitVersion}"
+    implementation "com.squareup.retrofit2:converter-scalars:${rootProject.ext.retrofitVersion}"
+
+    // Gson
+    implementation "com.google.code.gson:gson:${rootProject.ext.gsonVersion}"
+
+    // DI
+    implementation "com.google.dagger:hilt-android:${rootProject.ext.hiltVersion}"
+    kapt "com.google.dagger:hilt-compiler:${rootProject.ext.hiltVersion}"
+
+
+    implementation "androidx.navigation:navigation-fragment-ktx:${rootProject.ext.navigationKtxVersion}"
+    implementation "androidx.navigation:navigation-ui-ktx:${rootProject.ext.navigationKtxVersion}"
+
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${rootProject.ext.coroutinesVersion}"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:${rootProject.ext.glideVersion}"
+
+
+    implementation "androidx.paging:paging-runtime-ktx:${rootProject.ext.paggingVersion}"
+
+}
